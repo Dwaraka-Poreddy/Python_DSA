@@ -371,6 +371,28 @@ class Solution(object):
         else:
             return digits
         
+#Optimized by removing unnecessary traversals
+class Solution(object):
+    def plusOne(self, digits):
+        """
+        :type digits: List[int]
+        :rtype: List[int]
+        """
+        carry = 1
+        
+        for i in range(len(digits)-1, -1, -1):
+            if carry == 0:
+                break
+            sum = carry + digits[i]
+            carry = sum // 10
+            digits[i] = sum % 10
+        if carry != 0:
+            ans = [carry]
+            ans.extend(digits)
+            return ans
+        else:
+            return digits
+        
 
 # https://leetcode.com/problems/add-binary/description/
 
@@ -435,3 +457,19 @@ class Solution(object):
         :rtype: str
         """
         return bin(int(a,2) + int(b,2))[2:]
+
+# https://leetcode.com/problems/excel-sheet-column-number/
+
+class Solution(object):
+    def titleToNumber(self, columnTitle):
+        """
+        :type columnTitle: str
+        :rtype: int
+        """
+        if len(columnTitle) == 1:
+            return ord(columnTitle[0])-64
+        ans = 0
+        for i in range(0,len(columnTitle)):
+            ans = ans * 26+(ord(columnTitle[i])-64)
+        return ans
+
